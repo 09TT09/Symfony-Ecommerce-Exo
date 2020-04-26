@@ -1,0 +1,56 @@
+
+nav:
+    accueil: 'Home'
+    panier: 'Cart'
+    deconnexion: 'Logout'
+    connexion: 'Login'
+    inscription: 'Register'
+
+accueil:
+    accueil: 'Home'
+    infos: 'Infos'
+    prix: 'Price : '
+    argent: '$'
+    stock: 'Products in stock'
+    ajout: 'Add to cart'
+    creer: 'Add a product'
+    
+produit:
+    nom: 'Name'
+    description: 'Description'
+    stock: 'Stock'
+    prix: 'Price'
+    modif: 'Edit the product'
+
+formajoutproduit:
+    nom: 'Name'
+    prix: 'Price'
+    stock: 'Stock'
+    description: 'Description'
+    photo: 'Picture'
+    sauvegarder: 'Save'
+    supprimer: 'Delete'
+    
+formcontenupanier:
+    quantite: 'Quantity'
+    ajout: 'Add to card'
+    
+message:
+    erreur: 'Error'
+    succes: 'Success'
+
+panier:
+    panier: 'Cart'
+    nom: 'Name'
+    quantite: 'Quantity'
+    prix: 'Price'
+    prixtotal: 'Total Price'
+    supprimer: 'Delete'
+    total: 'Total :'
+
+
+
+
+
+
+

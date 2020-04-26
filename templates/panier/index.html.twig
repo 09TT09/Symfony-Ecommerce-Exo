@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello PanierController!{% endblock %}
+
+{% block body %}
+
+<h1>{{ 'panier.panier'|trans }}</h1>
+
+{% if app.user %}
+	{% if contenupaniers is not empty %}
+	{% set Total = 0 %}
+	{% for contenupanier in contenupaniers %}
+			{% set Total = Total + ( contenupanier.quantite * contenupanier.produit.prix ) %}
+	{% endfor %}
+		<table class="classtable">
+			<thead>
+				<tr>
+					<th>{{ 'panier.nom'|trans }}</th>
+					<th>{{ 'panier.quantite'|trans }}</th>
+					<th>{{ 'panier.prix'|trans }}</th>
+					<th>{{ 'panier.prixtotal'|trans }}</th>
+					{% if is_granted('ROLE_ADMIN') %}
+						<th>{{ 'panier.supprimer'|trans }}</th>
+					{% endif %}
+				</tr>
+			</thead>
+			<tbody>
+				{% for contenupanier in contenupaniers %}
+					<tr>
+						<td>{{ contenupanier.produit.nom }}</td>
+						<td>{{ contenupanier.quantite }}</td>
+						<td>{{ contenupanier.produit.prix }} {{ 'accueil.argent'|trans }}</td>
+						<td>{{ contenupanier.quantite * contenupanier.produit.prix }} {{ 'accueil.argent'|trans }}</td>
+						{% if is_granted('ROLE_ADMIN') %} <!-- si le l'utilisateur à le role admin alors... -->
+							<td><button class="button_2" onclick="location.href='{{path('panier_delete',{ 'id':contenupanier.id }) }}'"><b>{{ 'panier.supprimer'|trans }}</b></button></td>
+						{% endif %}
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	{% else %}
+		<p>Il n'y a aucun produit dans le panier</p>
+	{% endif %}
+	<p style="text-align:center">{{ 'panier.total'|trans }} {{ Total }} {{ 'accueil.argent'|trans }}</p>
+{% endif %}
+
+
+{% endblock %}

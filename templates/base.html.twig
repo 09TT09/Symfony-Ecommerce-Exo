@@ -1,12 +1,222 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+	<head>
+		<meta charset="UTF-8">
+		<title>{% block title %}Welcome!{% endblock %}</title>
+		{% block stylesheets %}{% endblock %}
+	</head>
+	<body>
+	<style>
+		body{
+			margin: 0;
+			padding: 0;
+			font-family: Arial;
+		}
+		header{
+			height: 50px;
+			background-color: #18171B;
+			text-align: center;
+			line-height: 48px;
+		}
+		h1{
+			text-align: center;
+		}
+		h2{
+			text-align: center;
+		}
+		.classtable{
+			margin: auto;
+			margin-top: 100px;
+			width: 80%;
+			text-align: center;
+			background-color: #18171B;
+			box-shadow: 4px 4px 4px gray;
+		}
+		th{
+			width : calc(80% / 6);
+			height: 50px;
+			background-color: #18171B;
+			color: white;
+		}
+		td{
+			width : calc(80% / 6);
+			height: 50px;
+			background-color: white;
+		}
+		.div_globale{
+			margin: auto;
+			width: 80%;
+			text-align: center;
+			border-left: solid black 1px;
+			border-right: solid black 1px;
+		}
+		.div_tiers{
+			display: inline-block;
+			width: 28%;
+			min-width: 200px;
+			border: solid black 1px;
+			text-align: center;
+			padding: 10px;
+			margin: 5px;
+			color: white;
+			background-color: #18171B;
+			transition: .25s;
+			box-shadow: 4px 4px 4px gray;
+		}
+		.div_tiers:hover{
+			transform: scale(1.03,1.03);
+		}
+		.prix_stock_div{
+			height: 100px;
+		}
+		.hr_perso{
+			width: 100%;
+			height: 1px;
+			background-color: white;
+		}
+		.button_nav{
+			height: 35px;
+			line-height: 35px;
+			width:  120px;
+			transition: .25s;
+			border: solid white 1px;
+			background-color: white;
+		}
+		.button_nav:hover{
+			border: solid #18171B 1px; 
+			animation: button_nav_anim 0.1s forwards;
+			transform: scale(0.95,0.95);
+		}
+		.button_2{
+			height: 35px;
+			line-height: 35px;
+			width:  120px;
+			transition: .25s;
+			border: solid #18171B 1px;
+			background-color: white;
+		}
+		.button_2:hover{
+			animation: button_nav_anim 0.1s forwards;
+			transform: scale(0.95,0.95);
+		}
+		.button_delete{
+			height: 35px;
+			line-height: 35px;
+			width:  120px;
+			transition: .25s;
+			color: white;
+			border: solid #18171B 1px;
+			background-color: crimson;
+		}
+		.button_delete:hover{
+			transform: scale(0.95,0.95);
+			color: crimson;
+			border: solid crimson 1px;
+			background-color: white;
+		}
+		@keyframes button_nav_anim{
+			0%{background: linear-gradient(45deg, orange, yellow);}
+			100%{background: linear-gradient(45deg, orange, yellow);}
+		}
+		.form_div{
+			width: 100%;
+			background-color: #18171B;
+			color: white;
+			text-align: center;
+			margin-top: 20px;
+			padding-top: 20px;
+			padding-bottom: 30px;
+		}
+		.text_input{
+			width: 86%;
+			height: 80px;
+			border-radius: 10px;
+			border: solid white 3px;
+			padding: 10px;
+		}
+		.string_input{
+			width: 100%;
+			border-radius: 10px;
+			border: solid white 3px;
+		}
+		.form_placement_div{
+			margin: auto;
+			width: 60%;
+			padding: 10%;
+			padding-top: 0px;
+			padding-bottom: 0px;
+			border-left: solid white 1px;
+			border-right: solid white 1px;
+			transition: .35s;
+		}
+		.form_placement_div:hover{
+			padding: 5%;
+			padding-top: 0px;
+			padding-bottom: 0px;
+			transform: scale(1.02,1.02);
+		}
+		.form_tiers{
+			display: inline-block;
+			width: 28%;
+			padding: 10px;
+		}
+		.text_center{
+			text-align: center;
+		}
+		.email_color{
+			background: linear-gradient(45deg, cyan, aquamarine);
+		}
+		.button_2{
+			height: 35px;
+			line-height: 35px;
+			width:  120px;
+			transition: .25s;
+			border: solid #18171B 1px;
+			background-color: white;
+		}
+		.button_2:hover{
+			animation: button_nav_anim 0.1s forwards;
+			transform: scale(0.95,0.95);
+		}
+		@keyframes button_nav_anim{
+			0%{background: linear-gradient(45deg, orange, yellow);}
+			100%{background: linear-gradient(45deg, orange, yellow);}
+		}
+		.alert{
+			text-align: center;
+			margin: auto;
+			margin-top: 20px;
+			margin-bottom: 20px;
+			border: solid black 1px;
+			padding: 10px;
+		}
+		.alert-success{
+			background-color: lime;
+			width: 200px;
+		}
+		.alert-danger{
+			background-color: red;
+			color: white;
+			width: 200px;
+		}
+	</style>
+	<header>
+		<button class="button_nav" onclick="location.href='{{path('accueil')}}'"><b>{{ 'nav.accueil'|trans }}</b></button>
+		{% if app.user %}
+			<button class="button_nav" onclick="location.href='{{path('panier')}}'"><b>{{ 'nav.panier'|trans }}</b></button>
+			<button class="button_delete" onclick="location.href='{{path('app_logout')}}'"><b>{{ 'nav.deconnexion'|trans }}</b></button>
+			<span style="color:white;">{{ app.user.prenom }} {{ app.user.nom }}</span>
+		{% else %}
+			<button class="button_nav" onclick="location.href='{{path('app_login')}}'"><b>{{ 'nav.connexion'|trans }}</b></button>
+			<button class="button_nav" onclick="location.href='{{path('app_register')}}'"><b>{{ 'nav.inscription'|trans }}</b></button>
+		{% endif %}
+	</header>
+	{% for type, messages in app.flashes %}
+		{% for message in messages %}
+			<p class="alert alert-{{type}}">{{message|trans}}</p>
+		{% endfor %}
+	{% endfor %}
+	{% block body %}{% endblock %}
+	{% block javascripts %}{% endblock %}
+	</body>
 </html>

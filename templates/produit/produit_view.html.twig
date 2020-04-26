@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ produit.nom }}{% endblock %}
+
+{% block body %}
+
+	<div class="text_center">
+		<h1>{{ produit.nom }}</h1>
+		
+		{% if produit.photo is not null %}
+		<p>
+			<p><img height="300" src="{{ asset('/photos_produits/'~ produit.photo) }}"></p>
+		</p>
+		{% endif %}
+		
+		<h3>{{ 'produit.nom'|trans }}</h3>
+		<p>{{ produit.description }}</p>
+		<h3>{{ 'produit.prix'|trans }}</h3>
+		<p>{{ produit.prix }} {{ 'accueil.argent'|trans }}</p>
+		<h3>{{ 'produit.stock'|trans }}</h3>
+		<p>{{ produit.stock }} {{ 'accueil.stock'|trans }}</p>
+		{% if app.user %}
+			{{ form(form_contenupanier) }}
+		{% endif %}
+	</div>
+
+	{% if is_granted('ROLE_ADMIN') %}
+
+		<div class="form_div">
+			<h2>{{ 'produit.modif'|trans }}</h2>
+
+			<div class="form_placement_div">
+				{{ form_start(form_edit) }}
+					<div class="form_tiers">
+						{{ form_label(form_edit.nom) }}<br>
+						{{ form_widget(form_edit.nom, { 'attr': {'class': 'string_input'} }) }}<br><br>
+					</div>
+
+					<div class="form_tiers">
+						{{ form_label(form_edit.prix) }}<br>
+						{{ form_widget(form_edit.prix, { 'attr': {'class': 'string_input'} }) }}<br><br>
+					</div>
+
+					<div class="form_tiers">
+						{{ form_label(form_edit.stock) }}<br>
+						{{ form_widget(form_edit.stock, { 'attr': {'class': 'string_input'} }) }}<br><br>
+					</div>
+
+					{{ form_label(form_edit.description) }}<br><br>
+					{{ form_widget(form_edit.description, { 'attr': {'class': 'text_input'} }) }}<br><br>
+
+					{{ form_label(form_edit.photo) }}<br><br>
+					{{ form_widget(form_edit.photo) }}<br><br>
+
+					<p>{{ form_row(form_edit.sauvegarder, { 'attr': {'class': 'button_2'} }) }}</p>
+				{{ form_end(form_edit) }}
+				<td><button class="button_delete" onclick="location.href='{{path('produit_delete',{ 'id':produit.id }) }}'">{{ 'formajoutproduit.supprimer'|trans }}</button></td>
+			</div>
+		</div>
+
+	{% endif %}
+
+{% endblock %}

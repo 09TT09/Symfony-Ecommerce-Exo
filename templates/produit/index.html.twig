@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+
+
+	<h1>{{ 'accueil.accueil'|trans }}</h1>
+	
+	{% if produits is not empty %}
+	<div class="div_globale">
+
+		{% for produit in produits %}<div class="div_tiers">
+			<p><b>{{ produit.nom }}</b><br></p>
+			{% if produit.photo is not null %}
+					<p><img height="130" src="{{ asset('/photos_produits/'~ produit.photo) }}"></p>
+			{% endif %}
+			<div class="prix_stock_div">
+				<p><b>{{ 'accueil.prix'|trans }}{{ produit.prix }} {{ 'accueil.argent'|trans }}</b></p><div class="hr_perso"></div>
+				<p><b>{{ produit.stock }} {{ 'accueil.stock'|trans }}</b></p>
+			</div>
+			{% if app.user %}
+				<!--<button class="button_2">{{ 'accueil.ajout'|trans }}</button>-->
+			{% endif %}
+				<button class="button_2" onclick="location.href='{{path('produit_view',{ 'id':produit.id }) }}'">{{ 'accueil.infos'|trans }}</button>
+		</div>{% endfor %}
+
+	</div>
+	
+	{% else %}
+		<p style="text-align:center;">Il n'y a aucun produit pour le moment.</p>
+	{% endif %}
+	
+	{% if is_granted('ROLE_ADMIN') %}
+	
+		<div class="form_div">
+			<h2>{{ 'accueil.creer'|trans }}</h2>
+	
+			<div class="form_placement_div">
+				{{ form_start(form_ajout) }}
+					<div class="form_tiers">
+						{{ form_label(form_ajout.nom) }}<br>
+						{{ form_widget(form_ajout.nom, { 'attr': {'class': 'string_input'} }) }}<br><br>
+					</div>
+		
+					<div class="form_tiers">
+						{{ form_label(form_ajout.prix) }}<br>
+						{{ form_widget(form_ajout.prix, { 'attr': {'class': 'string_input'} }) }}<br><br>
+					</div>
+		
+					<div class="form_tiers">
+						{{ form_label(form_ajout.stock) }}<br>
+						{{ form_widget(form_ajout.stock, { 'attr': {'class': 'string_input'} }) }}<br><br>
+					</div>
+		
+					{{ form_label(form_ajout.description) }}<br><br>
+					{{ form_widget(form_ajout.description, { 'attr': {'class': 'text_input'} }) }}<br><br>
+		
+					{{ form_label(form_ajout.photo) }}<br><br>
+					{{ form_widget(form_ajout.photo) }}<br><br>
+		
+					<p>{{ form_row(form_ajout.sauvegarder, { 'attr': {'class': 'button_2'} }) }}</p>
+				{{ form_end(form_ajout) }}
+			</div>
+		</div>
+	
+	{% endif %}
+
+{% endblock %}

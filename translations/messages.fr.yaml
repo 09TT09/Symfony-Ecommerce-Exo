@@ -1,0 +1,56 @@
+
+nav:
+    accueil: 'Accueil'
+    panier: 'Panier'
+    deconnexion: 'Déconnexion'
+    connexion: 'Connexion'
+    inscription: 'Inscription'
+
+accueil:
+    accueil: 'Accueil'
+    infos: 'Infos'
+    prix: 'Prix : '
+    argent: '€'
+    stock: 'Produits en stock'
+    ajout: 'Ajouter au panier'
+    creer: 'Ajouter un produit'
+    
+produit:
+    nom: 'Nom'
+    description: 'Description'
+    stock: 'Stock'
+    prix: 'Prix'
+    modif: 'Modifier le produit'
+
+formajoutproduit:
+    nom: 'Nom'
+    prix: 'Prix'
+    stock: 'Stock'
+    description: 'Description'
+    photo: 'Photo'
+    Sauvegarder: 'Save'
+    supprimer: 'Supprimer'
+    
+formcontenupanier:
+    quantite: 'Quantité'
+    ajout: 'Ajouter au panier'
+
+message:
+    erreur: 'Erreur'
+    succes: 'Succes'
+
+panier:
+    panier: 'Panier'
+    nom: 'Nom'
+    quantite: 'Quantité'
+    prix: 'Prix'
+    prixtotal: 'Prix Total'
+    supprimer: 'Supprimer'
+    total: 'Total :'
+
+
+
+
+
+
+
